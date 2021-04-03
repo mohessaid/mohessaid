@@ -1,4 +1,4 @@
-![Banner](https://githu.com/mohessaid/mohessaid/blob/master/assets/cover.png)
+![Banner](https://github.com/mohessaid/mohessaid/blob/main/assets/cover.jpg)
 ### Hi there 👋
 
 Mohessaid stands for Mohammed Essaid, nothing fancy, just an abbreviation people used to call me. Currently, I go with "Full-stack Developer" as a title in this industry. I use PHP, JavaScript for most of my projects. I spend most of my time working on Moodle LMS related projects.
