@@ -1,0 +1,6 @@
+baseURL = 'https://mohessaid.com/'
+languageCode = 'en-us'
+title = 'Mohessaid'
+disableLiveReload = false
+description = "The official website of Mohammed Essaid MEZERREG."
+enableEmoji = true
