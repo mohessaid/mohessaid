@@ -1,4 +1,4 @@
-![Banner](https://github.com/mohessaid/mohessaid/blob/main/public/assets/cover.jpg)
+![Banner](https://github.com/mohessaid/mohessaid/blob/main/assets/cover.jpg)
 
 ### Hi there 👋
 
