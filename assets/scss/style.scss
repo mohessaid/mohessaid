@@ -1,7 +1,16 @@
 @charset "utf-8";
+@import "opencolors";
+@import "common";
+
+$default-fonts: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
 
 html, body {
     width: 70%;
-    line-height: 1.5rem;
-    font-family: "system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default";
+    line-height: 1.75rem;
+    font-family: $default-fonts;
+    background-color: #d3f9d8;
+
+    @media screen and (max-width: 750px) {
+        width: auto;
+    }
 }

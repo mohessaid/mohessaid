@@ -1,9 +1,5 @@
 +++
-
-title = "Mohammed Essaid MEZERREG"
 description = "The official website of Mohammed Essaid MEZERREG."
-[params]
-    subtitle = "A dev wandering in the tech party!"
 
 +++
 

@@ -1,4 +1,11 @@
+.text-muted {
+  color: #495057; }
+
 html, body {
   width: 70%;
-  line-height: 1.5rem;
-  font-family: "system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default"; }
+  line-height: 1.75rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  background-color: #d3f9d8; }
+  @media screen and (max-width: 750px) {
+    html, body {
+      width: auto; } }

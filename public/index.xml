@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mohammed Essaid MEZERREG on Mohessaid</title>
-    <link>https://mohessaid.com/</link>
-    <description>Recent content in Mohammed Essaid MEZERREG on Mohessaid</description>
+    <title>Mohammed Essaid MEZERREG</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Mohammed Essaid MEZERREG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://mohessaid.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Oct 2024 10:43:00 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Adding SVG Logo to Hugo!</title>
+      <link>http://localhost:1313/journal/001_logo/</link>
+      <pubDate>Wed, 30 Oct 2024 10:43:00 +0100</pubDate>
+      <guid>http://localhost:1313/journal/001_logo/</guid>
+      <description>&lt;p&gt;I tried to add my SVG logo to the header of this website. I found some solutions, but they didn&amp;rsquo;t work for me.&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
