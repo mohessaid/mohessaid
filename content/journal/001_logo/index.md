@@ -1,6 +1,7 @@
 +++
 title = "Adding SVG Logo to Hugo!"
 date = 2024-10-30T10:43:00+01:00
+type = "journal"
 +++
 
 I tried to add my SVG logo to the header of this website. I found some solutions, but they didn't work for me.
