@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="personal,website,programming,coding,architect,moodle,development,developer">
 <meta name="description" content="{{ .Description }}">
-<title>{{ .Title }}</title>
+<title>{{ .Site.Title }}</title>
 {{- /* style.min.css */ -}}
 {{ with resources.Get "scss/style.scss" }}
   {{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }}
@@ -16,3 +16,12 @@
     {{ end }}
   {{ end }}
 {{ end }}
+<!-- Google tag (gtag.js) -->
+<script async defer src="https://www.googletagmanager.com/gtag/js?id={{.Site.Config.Services.GoogleAnalytics.ID}}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{.Site.Config.Services.GoogleAnalytics.ID}}');
+</script>

@@ -1,9 +1,6 @@
 baseURL = 'https://mohessaid.com/'
 languageCode = 'en-us'
-title = 'Mohammed Essaid MEZERREG'
+title = "Mohammed Essaid MEZERREG"
 disableLiveReload = false
 description = "The official website of Mohammed Essaid MEZERREG."
 enableEmoji = true
-
-[params]
-subtitle = "A Developer wandering in the tech party!"
