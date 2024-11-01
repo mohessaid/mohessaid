@@ -4,10 +4,6 @@
         <div class="home-page-content">
             {{ .Content }}
         </div>
-        <div>
-            {{ range first 10 .Site.RegularPages }}
-                {{ .Render "summary"}}
-            {{ end }}
-        </div>
+        <a href="{{ .Site.Home.Permalink }}">{{ emojify ":house:"}} Back home</a>
     </main>
 {{ end }}

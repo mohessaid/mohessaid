@@ -1,7 +1,7 @@
 <article>
     <h3>
         {{ with index site.Params.emojis .Params.type }}
-            {{/*  {{ . | .RenderString }} <!-- Show the emoji from params.toml -->  */}}
+            {{ emojify . }} <!-- Show the emoji from params.toml -->
         {{ else }}
             📄 <!-- Default emoji if type not found -->
         {{ end }}
