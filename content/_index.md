@@ -13,6 +13,6 @@ Mohessaid stands for Mohammed Essaid, nothing fancy, just an abbreviation people
 
 [Github](https://github.com/mohessaid) | [Medium](https://mohessaid.medium.com)
 
-I wrote this in Nvim and I very pround of that...
+I wrote this in Nvim and I'm very pround of that...
 
 In the process of building it with [Hugo](https://gohugo.io)
