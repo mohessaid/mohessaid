@@ -6,8 +6,15 @@
     <description>Recent content on Mohammed Essaid MEZERREG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Oct 2024 10:43:00 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 06 Nov 2024 10:37:00 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What I Follow in 2024</title>
+      <link>http://localhost:1313/blog/following-2024/</link>
+      <pubDate>Wed, 06 Nov 2024 10:37:00 +0100</pubDate>
+      <guid>http://localhost:1313/blog/following-2024/</guid>
+      <description>Around 7:00 a.m today. I checked on LinkedIn out of curiousity to see what&amp;rsquo;s going on. I stumbled on this post where Bassem Dghaidi shared his list of recommended books and channels on YouTube. I know some of what he shared in his list. However, I wanted to share what I find worthy of following. I started writing a comment on his post. However, the list kept growing. Since I live by the rule Scott Henslman once mentioned in his blog.</description>
+    </item>
     <item>
       <title>Adding SVG Logo to Hugo!</title>
       <link>http://localhost:1313/journal/001_logo/</link>
