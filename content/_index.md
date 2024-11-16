@@ -11,8 +11,8 @@ Mohessaid stands for Mohammed Essaid, nothing fancy, just an abbreviation people
 - 💬 Ask me about Moodle on [DevLMS](https://devlms.com).
 - 😎 My handle everywhere is: `@mohessaid`
 
-[Github](https://github.com/mohessaid) | [Medium](https://mohessaid.medium.com)
+[{{< ico fab github >}}](https://github.com/mohessaid) | [{{< ico fab medium >}}](https://mohessaid.medium.com) | [{{< ico fab hashnode >}}](https://devmind.mohessaid.com) | [{{< ico fab linkedin >}}](https://linkedin.com/in/mohessaid)
 
 I wrote this in Nvim and I'm very proud of that...
 
-In the process of building it with [Hugo](https://gohugo.io)
+In the process of building it from scratch with [Hugo](https://gohugo.io).

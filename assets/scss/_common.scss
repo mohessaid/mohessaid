@@ -1,3 +1,17 @@
 .text-muted {
     color: $oc-gray-7;
 }
+
+a {
+    color: $oc-gray-9;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:visited{
+       color: $oc-gray-7;
+    }
+
+    &:hover {
+        color: $oc-orange-9;
+    }
+}

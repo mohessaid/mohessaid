@@ -1,6 +1,15 @@
 .text-muted {
   color: #495057; }
 
+a {
+  color: #212529;
+  text-decoration: none;
+  font-weight: 500; }
+  a:visited {
+    color: #495057; }
+  a:hover {
+    color: #d9480f; }
+
 html, body {
   width: 70%;
   line-height: 1.75rem;

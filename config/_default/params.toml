@@ -6,3 +6,6 @@ journal = ":notebook:"
 tutorial = ":blue_book:"
 news = ":newspaper:"
 blog = ":page_facing_up:"
+
+[icons]
+throw_on_error = true
