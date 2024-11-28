@@ -11,7 +11,9 @@ I published a post on how I fixed the issue on different platforms online. This 
 
 I will update this post every other day to see how the stats are doing. Also, how the race for the first spot in search results is going.
 
-# Medium
+# [Medium](https://mohessaid.medium.com/how-to-host-hugo-in-vercel-d7dff8dffe6f)
+
+Published on Thrusday 28th November 2024. At 11:32 a.m (GMT+1).
 
 | Metric | Stats |
 | ------ | ----- |
@@ -19,7 +21,9 @@ I will update this post every other day to see how the stats are doing. Also, ho
 | Reads |  n/a |
 | Search |  n/a |
 
-# Dev.to
+# [Dev.to](https://dev.to/mohessaid/how-to-host-hugo-in-vercel-3d57)
+
+Published on Thrusday 28th November 2024. At 11:30 a.m (GMT+1).
 
 | Metric | Stats |
 | ------ | ----- |
@@ -27,7 +31,9 @@ I will update this post every other day to see how the stats are doing. Also, ho
 | Reads |  n/a |
 | Search |  n/a |
 
-# Hashnode
+# [Hashnode](https://devmind.mohessaid.com/how-to-host-hugo-in-vercel)
+
+Published on Thursday 28th November 2024. At 11:26 a.m (GMT+1).
 
 | Metric | Stats |
 | ------ | ----- |
@@ -35,7 +41,9 @@ I will update this post every other day to see how the stats are doing. Also, ho
 | Reads |  n/a |
 | Search |  n/a |
 
-# Differ
+# [Differ](https://differ.blog/p/how-to-host-hugo-in-vercel-3ee20d)
+
+Published on Thrusday 28th November 2024. At 11:29 a.m (GMT+1).
 
 | Metric | Stats |
 | ------ | ----- |
