@@ -6,14 +6,21 @@
     <description>Recent content on Mohammed Essaid MEZERREG</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Nov 2024 22:44:00 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 28 Nov 2024 11:44:00 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Host Hugo in Vercel</title>
+      <link>http://localhost:1313/blog/how-to-host-hugo-in-vercel/</link>
+      <pubDate>Thu, 28 Nov 2024 11:44:00 +0100</pubDate>
+      <guid>http://localhost:1313/blog/how-to-host-hugo-in-vercel/</guid>
+      <description>&lt;p&gt;I decided to go with &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; to build my personal &lt;a href=&#34;https://mohessaid.com&#34;&gt;website&lt;/a&gt;. The only thing I based my choice on was the build time. I thought Hugo was in the same league as &lt;a href=&#34;https://astro.new&#34;&gt;Astro&lt;/a&gt; when it comes to content management perks, but it isn&amp;rsquo;t quite there yet. Or, I can say it has its own path since it&amp;rsquo;s older than most of the other static site generators I&amp;rsquo;ve encountered. Moreover, it&amp;rsquo;s a Go application, which is another important factor to consider when evaluating technology choices.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>An Expirement on Writing Platforms</title>
       <link>http://localhost:1313/blog/writing-platforms-expirement/</link>
       <pubDate>Mon, 25 Nov 2024 22:44:00 +0100</pubDate>
       <guid>http://localhost:1313/blog/writing-platforms-expirement/</guid>
-      <description></description>
+      <description>&lt;p&gt;I decided to run a little expirement on writing platforms. I didn&amp;rsquo;t have the right article until I faced an issue building this website on Vercel.&lt;/p&gt;&#xA;&lt;p&gt;I published a post on how I fixed the issue on different platforms online. This idea came to mind after seeing some posts doing well on &lt;a href=&#34;https://mohessaid.medium.com&#34;&gt;Medium&lt;/a&gt;. So I wanted to try other paltforms as well.&lt;/p&gt;&#xA;&lt;p&gt;I will update this post every other day to see how the stats are doing. Also, how the race for the first spot in search results is going.&lt;/p&gt;</description>
     </item>
     <item>
       <title>What I Follow in 2024</title>
