@@ -1,11 +1,13 @@
 @charset "utf-8";
+@import "bulma";
 @import "opencolors";
 @import "common";
 
 $default-fonts: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
 
 html, body {
-    width: 70%;
+    width: 1120px;
+    margin: auto;
     line-height: 1.75rem;
     font-family: $default-fonts;
     background-color: #d3f9d8;

@@ -6,3 +6,5 @@ github.com/hugomods/icons/vendors/font-awesome v0.6.10 h1:rneykY+FWcFpyBhTbva5tP
 github.com/hugomods/icons/vendors/font-awesome v0.6.10/go.mod h1:3izAIdRkMg2O0N1RWB4Uw615VErx75b/nC/199BYV50=
 github.com/hugomods/icons/vendors/lucide v0.3.40 h1:lNaY9NqFgBmSCUzJkw7xlcGUUWwlDy70gDGyKXgsHV8=
 github.com/hugomods/icons/vendors/lucide v0.3.40/go.mod h1:tgIPafbcACqfXEU1fc/TEx+hdKr7m7iDHZEgAKRkDJM=
+github.com/jgthms/bulma v0.0.0-20241227202524-785418143e18 h1:iSibU2thhlwtnJDyc+QJVkoi4Jou6QvHQzLGavN7XYc=
+github.com/jgthms/bulma v0.0.0-20241227202524-785418143e18/go.mod h1:89FLBKXYFKfOKAoDeUT26V0pHGwzr205cMXAEqtAVOI=

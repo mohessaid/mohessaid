@@ -1,3 +1,13 @@
+@forward "utilities";
+@forward "themes";
+@forward "base";
+@forward "elements";
+@forward "form";
+@forward "components";
+@forward "grid";
+@forward "layout";
+@forward "base/skeleton";
+@forward "helpers";
 .text-muted {
   color: #495057; }
 
@@ -11,7 +21,8 @@ a {
     color: #d9480f; }
 
 html, body {
-  width: 70%;
+  width: 1120px;
+  margin: auto;
   line-height: 1.75rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
   background-color: #d3f9d8; }
