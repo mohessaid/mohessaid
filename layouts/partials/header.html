@@ -1,6 +1,15 @@
-{{ readFile "assets/mohessaid_light.svg" | safeHTML }}
-<h1 class="title">{{ or .Title  .Site.Title }}</h1>
-{{ with or .Params.subtitle  .Site.Params.subtitle}}
-    <h3 class="text-muted">{{ . }}</h3>
-{{ end }}
-<div class="contra-hire-me-button" data-analyticsUserId="027072bc-4618-47e9-b07a-4feb4a9a709c" data-theme="light" data-username="mohessaid"></div><script async src="https://contra.com/static/embed/sdk.js" charset="utf-8"></script>
+<div class="columns is-vcentered is-centered">
+    <div class="column content section is-8 has-text-centered">
+      {{ readFile "assets/mohessaid_light.svg" | safeHTML }}
+      <h1 class="title is-size-2">{{ or .Title  .Site.Title }}</h1>
+      {{ with or .Params.subtitle  .Site.Params.subtitle}}
+        <h2 class="is-size-5">
+            {{ . }}
+        </h2>
+      {{ end }}
+
+      <div class="buttons is-centered">
+        <div class="contra-hire-me-button" data-analyticsUserId="027072bc-4618-47e9-b07a-4feb4a9a709c" data-theme="light" data-username="mohessaid"></div><script async src="https://contra.com/static/embed/sdk.js" charset="utf-8"></script>
+      </div>
+    </div>
+  </div>
