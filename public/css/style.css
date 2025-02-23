@@ -1,31 +1,28 @@
-@forward "utilities";
-@forward "themes";
-@forward "base";
-@forward "elements";
-@forward "form";
-@forward "components";
-@forward "grid";
-@forward "layout";
-@forward "base/skeleton";
-@forward "helpers";
 .text-muted {
-  color: #495057; }
+  color: #495057;
+}
 
 a {
   color: #212529;
   text-decoration: none;
-  font-weight: 500; }
-  a:visited {
-    color: #495057; }
-  a:hover {
-    color: #d9480f; }
+  font-weight: 500;
+}
+a:visited {
+  color: #495057;
+}
+a:hover {
+  color: #d9480f;
+}
 
 html, body {
   width: 1120px;
   margin: auto;
   line-height: 1.75rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-  background-color: #d3f9d8; }
-  @media screen and (max-width: 750px) {
-    html, body {
-      width: auto; } }
+  background-color: #d3f9d8;
+}
+@media screen and (max-width: 750px) {
+  html, body {
+    width: auto;
+  }
+}

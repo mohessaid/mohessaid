@@ -5,7 +5,7 @@
 <title>{{ .Site.Title }}</title>
 {{- /* style.min.css */ -}}
 {{ with resources.Get "scss/style.scss" }}
-  {{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }}
+  {{ $opts := dict "transpiler" "dartsass" "targetPath" "css/style.css" }}
   {{ with . | toCSS $opts }}
     {{ if hugo.IsDevelopment }}
       <link rel="stylesheet" href="{{ .RelPermalink }}">
