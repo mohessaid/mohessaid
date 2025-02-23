@@ -11,7 +11,9 @@ curl -L -o go.tar.gz https://go.dev$GO_URL
 tar -C $HOME -xzf go.tar.gz
 
 # Set up the environment for Go
-export PATH=$HOME/go/bin:$PATH
+export GOROOT=$HOME/go
+export GOPATH=$HOME/go_projects
+export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
 # Verify the Go installation
 go version
