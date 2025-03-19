@@ -4,3 +4,4 @@ title = "Mohammed Essaid MEZERREG"
 disableLiveReload = false
 description = "The official website of Mohammed Essaid MEZERREG."
 enableEmoji = true
+enableGitInfo=true
