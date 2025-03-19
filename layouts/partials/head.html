@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="personal,website,programming,coding,architect,moodle,development,developer">
 <meta name="description" content="{{ .Description }}">
-<title>{{ .Site.Title }}</title>
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 {{- /* style.min.css */ -}}
 {{ with resources.Get "scss/style.scss" }}
   {{ $opts := dict "transpiler" "dartsass" "targetPath" "css/style.css" }}

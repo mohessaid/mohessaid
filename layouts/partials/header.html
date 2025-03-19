@@ -1,6 +1,8 @@
 {{ readFile "assets/mohessaid_light.svg" | safeHTML }}
 <h1 class="title">{{ or .Title  .Site.Title }}</h1>
-{{ with or .Params.subtitle  .Site.Params.subtitle}}
-    <h3 class="text-muted">{{ . }}</h3>
+{{ if .Params.subtitle }}
+    <h3 class="text-muted">{{ .Params.subtitle }}</h3>
+    <div class="contra-hire-me-button" data-analyticsUserId="027072bc-4618-47e9-b07a-4feb4a9a709c" data-theme="light" data-username="mohessaid"></div><script async src="https://contra.com/static/embed/sdk.js" charset="utf-8"></script>
+{{ else if .IsHome }}
+    <h3 class="text-muted">{{ .Site.Params.subtitle }}</h3>
 {{ end }}
-<div class="contra-hire-me-button" data-analyticsUserId="027072bc-4618-47e9-b07a-4feb4a9a709c" data-theme="light" data-username="mohessaid"></div><script async src="https://contra.com/static/embed/sdk.js" charset="utf-8"></script>

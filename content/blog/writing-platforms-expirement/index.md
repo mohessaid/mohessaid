@@ -17,9 +17,9 @@ Published on Thursday 28th November 2024. At 11:32 a.m (GMT+1).
 
 | Metric | Stats |
 | ------ | ----- |
-| Views |  n/a |
-| Reads |  n/a |
-| Search |  n/a |
+| Views |  32 |
+| Reads |  19 |
+| Search |  3th (1st page)|
 
 # [Dev.to](https://dev.to/mohessaid/how-to-host-hugo-in-vercel-3d57)
 
@@ -27,7 +27,7 @@ Published on Thursday 28th November 2024. At 11:30 a.m (GMT+1).
 
 | Metric | Stats |
 | ------ | ----- |
-| Views |  n/a |
+| Views |  62 |
 | Reads |  n/a |
 | Search |  n/a |
 
@@ -37,9 +37,9 @@ Published on Thursday 28th November 2024. At 11:26 a.m (GMT+1).
 
 | Metric | Stats |
 | ------ | ----- |
-| Views |  n/a |
+| Views |  18 |
 | Reads |  n/a |
-| Search |  n/a |
+| Search |  1st (4th page) |
 
 # [Differ](https://differ.blog/p/how-to-host-hugo-in-vercel-3ee20d)
 
@@ -47,7 +47,7 @@ Published on Thursday 28th November 2024. At 11:29 a.m (GMT+1).
 
 | Metric | Stats |
 | ------ | ----- |
-| Views |  n/a |
+| Views |  9 |
 | Reads |  n/a |
 | Search |  n/a |
 
