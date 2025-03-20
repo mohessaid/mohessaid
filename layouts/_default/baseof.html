@@ -4,13 +4,21 @@
   {{ partial "head.html" . }}
 </head>
 <body>
-  <header>
-    {{ partial "header.html" . }}
-  </header>
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
-  <footer>
+  
+  <div class="section container">
+    <header>
+      {{ partial "header.html" . }}
+    </header>
+    <div>
+      <main style="margin-top: 4em;">
+        {{ block "main" . }}{{ end }}
+      </main>
+    </div>
+  </div>
+  <footer
+    class="section"
+    style="background-color: hsl(0, 0%, 96%); margin-top: 2em;"
+  >
     {{ partial "footer.html" . }}
   </footer>
 </body>
