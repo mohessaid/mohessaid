@@ -1,5 +1,7 @@
 
 subtitle = "A Developer wandering in the tech party!"
+defaultTheme = "light"
+disableThemeToggle = false
 
 [emojis]
 journal = ":notebook:"
