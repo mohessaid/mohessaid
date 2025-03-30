@@ -21554,57 +21554,6 @@ has-background-danger.is-hoverable:active {
   pointer-events: all !important;
 }
 
-/* Dark mode colors. */
-:root {
-  --sl-color-accent-low: #1a1a1a;
-  --sl-color-accent: #000000;
-  --sl-color-accent-high: #4a4a4a;
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #f5f5f5;
-  --sl-color-gray-2: #dbdbdb;
-  --sl-color-gray-3: #363636;
-  --sl-color-gray-4: #292929;
-  --sl-color-gray-5: #1a1a1a;
-  --sl-color-gray-6: #000000;
-  --sl-color-gray-7: #f5f6f8;
-  --sl-color-black: #ffffff;
-  --sl-color-success: #23d160;
-  --sl-color-success-invert: #fff3e0;
-  --sl-color-success-light: #dcfce7;
-  --sl-color-success-dark: #16a34a;
-  --sl-color-info: #3298dc;
-  --sl-color-info-invert: #f8fafc;
-  --sl-color-info-light: #bfdbfe;
-  --sl-color-info-dark: #0ea5e9;
-  --sl-color-warning: #ffdd57;
-  --sl-color-warning-invert: #fff7ed;
-  --sl-color-warning-light: #fef9c3;
-  --sl-color-warning-dark: #d97706;
-  --sl-color-danger: #ff3860;
-  --sl-color-danger-invert: #fff5f5;
-  --sl-color-danger-light: #fee2e2;
-  --sl-color-danger-dark: #dc2626;
-}
-
-:root[data-theme=light] {
-  --sl-color-accent-low: #1a1a1a;
-  --sl-color-accent: #000000;
-  --sl-color-accent-high: #4a4a4a;
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #f5f5f5;
-  --sl-color-gray-2: #dbdbdb;
-  --sl-color-gray-3: #363636;
-  --sl-color-gray-4: #292929;
-  --sl-color-gray-5: #1a1a1a;
-  --sl-color-gray-6: #000000;
-  --sl-color-gray-7: #f5f6f8;
-  --sl-color-black: #ffffff;
-}
-
-html {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-}
-
 .logo-container {
   display: flex;
   align-items: center;
@@ -21614,4 +21563,93 @@ html {
 .logo-container svg {
   max-height: 70%;
   width: auto;
+}
+
+body[data-theme=dark] #moon {
+  display: none;
+}
+
+body[data-theme=dark] #sun {
+  display: inline;
+}
+
+body[data-theme=light] #sun {
+  display: none;
+}
+
+body[data-theme=light] #moon {
+  display: inline;
+}
+
+/* Light mode styles */
+[data-theme=light] {
+  --background-color: #ffffff;
+  --text-color: #363636;
+  /* Define other properties as needed */
+}
+
+/* Dark mode styles */
+[data-theme=dark] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  /* Define other properties as needed */
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.hero {
+  background-color: var(--background-color);
+  /* Adjust other Bulma components similarly */
+}
+
+/* ------------------------- */
+/* PaperMod & Bulma Overrides */
+/* ------------------------- */
+/* Light theme overrides */
+[data-theme=light] {
+  /* PaperMod custom properties */
+  --theme: #ffffff;
+  --primary: #ffb14a;
+  --secondary: #99abe0;
+  --entry: #f8f8f8;
+  --content: #333333;
+  --hljs-bg: #1c1d21;
+  --code-bg: #f5f5f5;
+  --border: #eee;
+  /* Bridge for Bulma components.
+     (If you’re using Bulma’s built CSS that references CSS custom properties, override them here.)
+     Adjust variable names as needed if Bulma uses different naming conventions. */
+  --bulma-primary: var(--primary);
+  --bulma-link-color: var(--primary);
+  /* You can add more overrides as needed; for example: */
+  --bulma-button-background: var(--primary);
+  --bulma-button-border: var(--primary);
+}
+
+/* Dark theme overrides */
+[data-theme=dark] {
+  --theme: #101c7a;
+  --entry: #202062;
+  --primary: rgba(235,235,255,0.96);
+  --secondary: rgba(235,235,255,0.66);
+  --tertiary: rgba(1,1,5,0.32);
+  --content: rgba(235,235,255,0.82);
+  --hljs-bg: #2e2e33;
+  --code-bg: #37383e;
+  --border: #446;
+  /* Bulma dark-mode bridge */
+  --bulma-primary: var(--primary);
+  --bulma-link-color: var(--primary);
+  --bulma-button-background: var(--primary);
+  --bulma-button-border: var(--primary);
+}
+
+/* Example: ensure Bulma buttons use the updated colors.
+   (You may not need this if Bulma already references the custom properties.) */
+.button {
+  background-color: var(--bulma-button-background);
+  border-color: var(--bulma-button-border);
 }

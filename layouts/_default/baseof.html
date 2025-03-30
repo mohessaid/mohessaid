@@ -3,34 +3,13 @@
 <head>
   {{ partial "head.html" . }}
 </head>
-<body>
+<body class="section container is-fluid">
+  {{ partial "theme_init.html" . }}
   
-  <div class="section container">
-      {{ partial "header.html" . }}
-    <div>
-      <main style="margin-top: 4em;">
-        {{ block "main" . }}{{ end }}
-      </main>
-    </div>
-  </div>
-  <footer>
-    {{ partial "footer.html" . }}
-  </footer>
-  {{ with resources.Get "js/main.js" }}
-  {{ $opts := dict
-    "minify" hugo.IsProduction
-    "sourceMap" (cond hugo.IsProduction "" "external")
-    "targetPath" "js/main.js"
-  }}
-  {{ with . | js.Build $opts }}
-    {{ if hugo.IsProduction }}
-      {{ with . | fingerprint }}
-        <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
-      {{ end }}
-    {{ else }}
-      <script src="{{ .RelPermalink }}"></script>
-    {{ end }}
-  {{ end }}
-{{ end }}
+  {{ partial "header.html" . }}
+    
+  {{ block "main" . }}{{ end }}
+    
+  {{ partial "footer.html" . }}
 </body>
 </html>

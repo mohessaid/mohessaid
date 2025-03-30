@@ -24,16 +24,36 @@
   gtag('config', 'G-XXXXXXXXX');
 </script>
 
-</head>
-<body>
-  
-  <div class="section container">
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggleButton = document.getElementById('theme-toggle');
+    if (!toggleButton) return;
+    
+    toggleButton.addEventListener('click', function() {
       
+      var currentTheme = document.body.getAttribute('data-theme') || 'light';
+      
+      var newTheme = (currentTheme === 'dark') ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', newTheme);
+      
+      localStorage.setItem("pref-theme", newTheme);
+      
+      
+    });
+  });
+  </script>
+  
+
+</head>
+<body class="section container is-fluid">
+  
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
+        document.body.setAttribute('data-theme', 'dark');
     }
 </script>
+  
+  
 <header class="columns is-variable is-8">
     <div class="column is-2">
         <div class="logo-container">
@@ -76,46 +96,8 @@
         </button>
     </div>
 </header>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const moon = document.getElementById('moon');
-    const sun = document.getElementById('sun');
-
     
-    const savedTheme = localStorage.getItem('pref-theme');
-    if (savedTheme) {
-        document.body.classList.toggle('dark', savedTheme === 'dark');
-    } else {
-        
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.body.classList.toggle('dark', prefersDark);
-    }
-
-    
-    themeToggle.addEventListener('click', function() {
-        const isDark = document.body.classList.contains('dark');
-        document.body.classList.toggle('dark');
-        localStorage.setItem('pref-theme', isDark ? 'light' : 'dark');
-        
-        
-        moon.style.display = isDark ? 'inline' : 'none';
-        sun.style.display = isDark ? 'none' : 'inline';
-    });
-
-    
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        if (!localStorage.getItem('pref-theme')) {
-            document.body.classList.toggle('dark', e.matches);
-        }
-    });
-});
-</script>
-
-    <div>
-      <main style="margin-top: 4em;">
-        
+  
     <div class="columns is-variable is-8">
         <div class="column is-6">
             <div class="content">
@@ -184,12 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 
-      </main>
-    </div>
-  </div>
-  <footer>
     
-  </footer>
   
 </body>
 </html>

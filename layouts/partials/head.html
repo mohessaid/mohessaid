@@ -25,3 +25,23 @@
 
   gtag('config', '{{.Site.Config.Services.GoogleAnalytics.ID}}');
 </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggleButton = document.getElementById('theme-toggle');
+    if (!toggleButton) return;
+    
+    toggleButton.addEventListener('click', function() {
+      // Get current theme from the body's data attribute
+      var currentTheme = document.body.getAttribute('data-theme') || 'light';
+      // Toggle theme
+      var newTheme = (currentTheme === 'dark') ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', newTheme);
+      // Save preference in localStorage
+      localStorage.setItem("pref-theme", newTheme);
+      
+      // Optionally, update the icons visibility with CSS classes or inline styles here.
+    });
+  });
+  </script>
+  

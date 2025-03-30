@@ -1,20 +1,104 @@
 @charset "utf-8";
 @use "bulma";
-@use "_colors";
-
-$default-fonts: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-
-html {
-    font-family: $default-fonts;
-}
 
 .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    svg {
-        max-height: 70%;
-        width: auto;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  svg {
+    max-height: 70%;
+    width: auto;
+  }
+}
+
+body[data-theme="dark"] #moon {
+  display: none;
+}
+body[data-theme="dark"] #sun {
+  display: inline;
+}
+body[data-theme="light"] #sun {
+  display: none;
+}
+body[data-theme="light"] #moon {
+  display: inline;
+}
+
+
+/* Light mode styles */
+[data-theme="light"] {
+  --background-color: #ffffff;
+  --text-color: #363636;
+  /* Define other properties as needed */
+}
+
+/* Dark mode styles */
+[data-theme="dark"] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  /* Define other properties as needed */
+}
+
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.hero {
+  background-color: var(--background-color);
+  /* Adjust other Bulma components similarly */
+}
+
+/* ------------------------- */
+/* PaperMod & Bulma Overrides */
+/* ------------------------- */
+
+/* Light theme overrides */
+[data-theme="light"] {
+  /* PaperMod custom properties */
+  --theme: #ffffff;
+  --primary: #ffb14a;
+  --secondary: #99abe0;
+  --entry: #f8f8f8;
+  --content: #333333;
+  --hljs-bg: #1c1d21;
+  --code-bg: #f5f5f5;
+  --border: #eee;
+
+  /* Bridge for Bulma components.
+     (If you’re using Bulma’s built CSS that references CSS custom properties, override them here.)
+     Adjust variable names as needed if Bulma uses different naming conventions. */
+  --bulma-primary: var(--primary);
+  --bulma-link-color: var(--primary);
+  /* You can add more overrides as needed; for example: */
+  --bulma-button-background: var(--primary);
+  --bulma-button-border: var(--primary);
+}
+
+/* Dark theme overrides */
+[data-theme="dark"]{
+  --theme: #101c7a;
+  --entry: #202062;
+  --primary: rgba(235,235,255,0.96);
+  --secondary: rgba(235,235,255,0.66);
+  --tertiary: rgba(1,1,5,0.32);
+  --content: rgba(235,235,255,0.82);
+  --hljs-bg: #2e2e33;
+  --code-bg: #37383e;
+  --border: #446;
+
+  /* Bulma dark-mode bridge */
+  --bulma-primary: var(--primary);
+  --bulma-link-color: var(--primary);
+  --bulma-button-background: var(--primary);
+  --bulma-button-border: var(--primary);
+}
+
+/* Example: ensure Bulma buttons use the updated colors.
+   (You may not need this if Bulma already references the custom properties.) */
+.button {
+  background-color: var(--bulma-button-background);
+  border-color: var(--bulma-button-border);
 }
