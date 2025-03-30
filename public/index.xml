@@ -8,6 +8,13 @@
     <language>en-us</language>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Leaving Hugo to Astro</title>
+      <link>http://localhost:1313/blog/leaving-hugo-to-astro/</link>
+      <pubDate>Sun, 30 Mar 2025 18:00:00 +0100</pubDate>
+      <guid>http://localhost:1313/blog/leaving-hugo-to-astro/</guid>
+      <description>&lt;p&gt;Since I bought this domain, I&amp;rsquo;ve tested countless SSGs (Static Site Generators). I used Jekyll, Gatsby, Nexo, Next.js, and others. I never finished any of those versions—I switched between them because I have new ideas all the time. New ideas come with checking the right tools to release them, but as always, the will to do the actual work fades away in the searching phase. So, I never finished any of them nor used the acquired skills professionally; in fact, I dropped them the moment my will to continue vanished.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>How to Host Hugo in Vercel</title>
       <link>http://localhost:1313/blog/how-to-host-hugo-in-vercel/</link>
       <pubDate>Thu, 28 Nov 2024 11:44:00 +0100</pubDate>
