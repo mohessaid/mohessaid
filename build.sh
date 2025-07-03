@@ -1,38 +1,84 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Fetch the latest Go package URL
-GO_URL=$(curl -s https://go.dev/dl/ | grep -oP '/dl/go[0-9.]*.linux-amd64.tar.gz' | head -n 1)
+# ----------------------------------------
+# 0. Prep
+# ----------------------------------------
+export HOME_BIN="$HOME/bin"
+mkdir -p "$HOME_BIN"
 
-# Download the latest Go package and rename it to go.tar.gz
-curl -L -o go.tar.gz https://go.dev$GO_URL
+# ----------------------------------------
+# 1. Install latest Hugo
+# ----------------------------------------
+echo ">> Fetching latest Hugo release…"
+HUGO_LATEST_URL=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest \
+  | grep '"browser_download_url":' \
+  | grep 'Linux-64bit.tar.gz' \
+  | head -n1 \
+  | cut -d'"' -f4)
 
-# Extract the package to $HOME
-tar -C $HOME -xzf go.tar.gz
+echo ">> Downloading Hugo from $HUGO_LATEST_URL"
+curl -sL "$HUGO_LATEST_URL" -o hugo.tar.gz
 
-# Set up the environment for Go
-export GOROOT=$HOME/go
-export GOPATH=$HOME/go_projects
-export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+echo ">> Extracting Hugo to temp…"
+TMP_DIR=$(mktemp -d)
+tar -xzf hugo.tar.gz -C "$TMP_DIR"
+rm hugo.tar.gz
 
-# Verify the Go installation
-go version
+# Move only the binary
+if [[ -f "$TMP_DIR/hugo" ]]; then
+  mv "$TMP_DIR/hugo" "$HOME_BIN/hugo"
+else
+  find "$TMP_DIR" -type f -name hugo -exec mv {} "$HOME_BIN/hugo" \;
+fi
+rm -rf "$TMP_DIR"
 
-# Fetch the latest version of Dart Sass
-DART_SASS_VERSION=$(curl -sI -L -o /dev/null -w '%{url_effective}' https://github.com/sass/dart-sass/releases/latest | awk -F '/' '{print $NF}')
+chmod +x "$HOME_BIN/hugo"
+export PATH="$HOME_BIN:$PATH"
+echo ">> Hugo version: $(hugo version)"
 
-# Download Dart Sass
-curl -L -o dart-sass.tar.gz https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz
+# ----------------------------------------
+# 2. Install Go
+# ----------------------------------------
+echo ">> Fetching latest Go download path…"
+GO_URL_PATH=$(curl -s https://go.dev/dl/ \
+  | grep -m1 -oP '/dl/go[0-9.]+\.linux-amd64.tar.gz')
 
-# Extract the package to $HOME/bin
-mkdir -p $HOME/bin
-tar -xzf dart-sass.tar.gz -C $HOME/bin --strip-components=1
+GO_FULL_URL="https://go.dev${GO_URL_PATH}"
+echo ">> Downloading Go from $GO_FULL_URL"
+curl -sL -o go.tar.gz "$GO_FULL_URL"
 
-# Set up the environment for Dart Sass
-export PATH=$HOME/bin:$PATH
+echo ">> Extracting Go…"
+tar -C "$HOME" -xzf go.tar.gz
+rm go.tar.gz
 
-# Verify the Dart Sass installation
-sass --version
+export GOROOT="$HOME/go"
+export GOPATH="$HOME/go_projects"
+export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
+echo ">> Go version: $(go version)"
 
-# Build website
+# ----------------------------------------
+# 3. Install Dart Sass
+# ----------------------------------------
+echo ">> Fetching Dart Sass latest release URL…"
+DART_SASS_VERSION=$(curl -sI -L https://github.com/sass/dart-sass/releases/latest \
+  | awk -F/ '/Location:/ {print $NF}' | tr -d '\r')
+
+DART_SASS_URL="https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+echo ">> Downloading Dart Sass from $DART_SASS_URL"
+curl -sL -o dart-sass.tar.gz "$DART_SASS_URL"
+
+echo ">> Extracting Dart Sass…"
+tar -xzf dart-sass.tar.gz -C "$HOME_BIN" --strip-components=1
+rm dart-sass.tar.gz
+
+echo ">> Sass version: $(sass --version)"
+
+# ----------------------------------------
+# 4. Build your site
+# ----------------------------------------
+echo ">> Building site with Hugo…"
 hugo --gc --minify
+
+echo "✅ Build complete. Public folder is ready."
+
