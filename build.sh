@@ -34,15 +34,13 @@ echo ">> Hugo version: $(hugo version)"
 # ----------------------------------------
 # 2. Install Go (via JSON API)
 # ----------------------------------------
-echo ">> Fetching latest Go versions list…"
+echo ">> Fetching latest Go JSON…"
 GO_JSON=$(curl -s https://go.dev/dl/?mode=json)
-
 GO_FILENAME=$(printf '%s\n' "$GO_JSON" \
   | grep -oP '"filename":\s*"\Kgo[0-9]+\.[0-9]+\.[0-9]+\.linux-amd64\.tar\.gz' \
   | head -n1)
 
-[[ -n "$GO_FILENAME" ]] || { echo "❌ Go filename not found in JSON"; exit 1; }
-
+[[ -n "$GO_FILENAME" ]] || { echo "❌ Go filename not found"; exit 1; }
 GO_FULL_URL="https://go.dev/dl/${GO_FILENAME}"
 echo ">> Downloading Go from $GO_FULL_URL"
 curl -fSL "$GO_FULL_URL" -o go.tar.gz
@@ -57,19 +55,20 @@ export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 echo ">> Go version: $(go version)"
 
 # ----------------------------------------
-# 3. Install Dart Sass
+# 3. Install Dart Sass (via GitHub API)
 # ----------------------------------------
-echo ">> Fetching Dart Sass latest release URL…"
-DART_SASS_VERSION=$(curl -sI -L https://github.com/sass/dart-sass/releases/latest \
-  | awk -F/ '/Location:/ {print $NF}' | tr -d '\r')
+echo ">> Fetching latest Dart Sass release…"
+DART_JSON=$(curl -s https://api.github.com/repos/sass/dart-sass/releases/latest)
 
-[[ -n "$DART_SASS_VERSION" ]] || { echo "❌ Dart Sass version not found"; exit 1; }
+DART_ASSET_URL=$(printf '%s\n' "$DART_JSON" \
+  | grep -oP '"browser_download_url":\s*"\K[^"]*linux-x64\.tar\.gz' \
+  | head -n1)
 
-DART_SASS_URL="https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
-echo ">> Downloading Dart Sass from $DART_SASS_URL"
-curl -fSL "$DART_SASS_URL" -o dart-sass.tar.gz
+[[ -n "$DART_ASSET_URL" ]] || { echo "❌ Dart Sass asset URL not found"; exit 1; }
+echo ">> Downloading Dart Sass from $DART_ASSET_URL"
+curl -fSL "$DART_ASSET_URL" -o dart-sass.tar.gz
 
-echo ">> Extracting Dart Sass to $HOME_BIN…"
+echo ">> Extracting Dart Sass to $HOME_BIN…"
 tar -xzf dart-sass.tar.gz -C "$HOME_BIN" --strip-components=1
 rm dart-sass.tar.gz
 
