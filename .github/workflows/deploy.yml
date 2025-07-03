@@ -28,18 +28,6 @@ jobs:
           path: content
 
       # 3. Install & build (Astro or Hugo)
-      - name: Setup Node.js
-        if: exists(package.json)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: |
-          if [ -f package.json ]; then
-            npm ci
-          fi
-
       - name: Build site
         run: ./build.sh  
       # 4. Deploy to Vercel
