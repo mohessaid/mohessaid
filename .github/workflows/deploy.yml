@@ -1,0 +1,52 @@
+name: CI / Build & Deploy to Vercel
+
+on:
+  push:
+    branches: [ main ]
+  repository_dispatch:
+    types: [ content-updated ]
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Check out your code
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. Pull in website-content
+      - name: Pull in website content
+        uses: actions/checkout@v4
+        with:
+          repository: mohessaid/website_content
+          token: ${{ secrets.CONTENT_DISPATCH_TOKEN }}
+          path: content
+
+      # 3. Install & build (Astro or Hugo)
+      - name: Setup Node.js
+        if: exists(package.json)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+          fi
+
+      - name: Build site
+        run: ./build.sh  
+      # 4. Deploy to Vercel
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: .
