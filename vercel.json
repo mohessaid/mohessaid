@@ -4,10 +4,4 @@
   "github": {
     "enabled": false
   },
-  "builds": [
-    {
-      "src": "./public,
-      "use": "@vercel/static"
-    }
-  ],
 }
