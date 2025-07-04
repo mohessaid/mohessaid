@@ -30,6 +30,10 @@ jobs:
       # 3. Install & build (Astro or Hugo)
       - name: Build site
         run: ./build.sh  
+        
+      - name: List public directory
+        run: ls -la ./public
+        
       # 4. Deploy to Vercel
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
