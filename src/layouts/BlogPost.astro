@@ -1,0 +1,116 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  date: Date;
+  lang: 'ar' | 'en';
+  slug: string;
+  tags?: string[];
+  canonicalURL?: string;
+}
+
+const { title, description, date, lang, slug, tags = [], canonicalURL } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat(lang === 'ar' ? 'ar-DZ' : 'en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+}).format(date);
+
+const vtTitle = `post-title-${slug}`;
+const vtDate  = `post-date`;
+const backHref  = lang === 'ar' ? '/'    : '/en/';
+const backLabel = lang === 'ar' ? 'العودة' : 'Back';
+
+// ASCII-safe JSON encoding — prevents esbuild multi-byte char issues in inline scripts
+const toSafeJson = (obj: unknown) =>
+  JSON.stringify(obj).replace(/[^\x00-\x7F]/g, (c) =>
+    '\\u' + c.codePointAt(0)!.toString(16).padStart(4, '0')
+  );
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description ?? title,
+  url: canonicalURL,
+  datePublished: date.toISOString(),
+  dateModified: date.toISOString(),
+  inLanguage: lang,
+  keywords: tags.join(', ') || undefined,
+  author: {
+    '@type': 'Person',
+    '@id': 'https://mohessaid.com/#person',
+    name: 'Mohammed Essaid',
+  },
+  publisher: {
+    '@type': 'Person',
+    '@id': 'https://mohessaid.com/#person',
+    name: 'Mohammed Essaid',
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+};
+---
+
+<BaseLayout {title} {description} {lang} canonicalURL={canonicalURL}>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={toSafeJson(articleJsonLd)} />
+  </Fragment>
+  <Header slot="header" {lang} {slug} />
+
+  <article>
+    <a href={backHref} class="back-link">
+      {lang === 'ar'
+        ? <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        : <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      }
+      {backLabel}
+    </a>
+
+    <header class="post-header">
+      <h1 class="post-title" style={`view-transition-name: ${vtTitle}`}>{title}</h1>
+      <div class="post-meta-row">
+        <time datetime={date.toISOString()} class="post-meta" style={`view-transition-name: ${vtDate}`}>
+          {formattedDate}
+        </time>
+        {tags.length > 0 && (
+          <ul class="post-tags" aria-label={lang === 'ar' ? 'الوسوم' : 'Tags'}>
+            {tags.map(tag => <li class="post-tag">{tag}</li>)}
+          </ul>
+        )}
+      </div>
+    </header>
+
+    <div class="post-content">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-meta-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.4rem;
+  }
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .post-tag {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: var(--code-bg);
+    white-space: nowrap;
+  }
+</style>

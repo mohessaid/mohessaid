@@ -1,0 +1,31 @@
+---
+import BlogPost from '@/layouts/BlogPost.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) =>
+    data.lang === 'en' && !data.draft
+  );
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/^en\//, '').replace(/\.mdx?$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const slug = post.id.replace(/^en\//, '').replace(/\.mdx?$/, '');
+const canonicalURL = `https://mohessaid.com/en/blog/${slug}/`;
+---
+
+<BlogPost
+  title={post.data.title}
+  description={post.data.description}
+  date={post.data.date}
+  lang="en"
+  slug={slug}
+  tags={post.data.tags}
+  canonicalURL={canonicalURL}
+>
+  <Content />
+</BlogPost>

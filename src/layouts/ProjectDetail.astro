@@ -1,0 +1,193 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: 'ar' | 'en';
+  statusLabel: string;
+  statusColor: string;
+  startDate: string;
+  endDate: string;
+  projectId: string;
+  url?: string;
+  github?: string;
+  tech?: string[];
+  canonicalURL?: string;
+}
+
+const {
+  title, description, lang,
+  statusLabel, statusColor,
+  startDate, endDate, projectId,
+  url, github, tech = [],
+  canonicalURL,
+} = Astro.props;
+
+const t = useTranslations(lang);
+const backHref = lang === 'ar' ? '/projects/' : '/en/projects/';
+
+const vtBadge = `project-badge`;
+const vtTitle = `title-${projectId.replace(/\//g, '-')}`;
+const vtDates = `project-dates`;
+
+// ASCII-safe JSON encoding — prevents esbuild multi-byte char issues in inline scripts
+const toSafeJson = (obj: unknown) =>
+  JSON.stringify(obj).replace(/[^\x00-\x7F]/g, (c) =>
+    '\\u' + c.codePointAt(0)!.toString(16).padStart(4, '0')
+  );
+
+const projectJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareSourceCode',
+  name: title,
+  description: description ?? title,
+  url: canonicalURL,
+  inLanguage: lang,
+  dateCreated: startDate,
+  programmingLanguage: tech.length ? tech : undefined,
+  codeRepository: github || undefined,
+  author: {
+    '@type': 'Person',
+    '@id': 'https://mohessaid.com/#person',
+    name: 'Mohammed Essaid',
+  },
+};
+---
+
+<BaseLayout {title} {description} {lang} canonicalURL={canonicalURL}>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={toSafeJson(projectJsonLd)} />
+  </Fragment>
+  <Header slot="header" {lang} />
+
+  <a href={backHref} class="back-link">
+    {lang === 'ar'
+      ? <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      : <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+    }
+    <span>{t('projects.back')}</span>
+  </a>
+
+  <div class="project-header-full">
+    <div class="project-title-row">
+      <span class="project-status" style={`border-color: ${statusColor}; color: ${statusColor}; view-transition-name: ${vtBadge}`}>
+        {statusLabel}
+      </span>
+      <h1 class="project-title" style={`view-transition-name: ${vtTitle}`}>{title}</h1>
+    </div>
+
+    <div class="project-dates" style={`view-transition-name: ${vtDates}`}>
+      <span>{startDate}</span>
+      <span>&mdash;</span>
+      <span>{endDate}</span>
+    </div>
+
+    {(tech.length > 0 || url || github) && (
+      <div class="project-meta">
+        {tech.length > 0 && (
+          <ul class="tech-list" aria-label={lang === 'ar' ? 'التقنيات' : 'Tech stack'}>
+            {tech.map(t => <li class="tech-tag">{t}</li>)}
+          </ul>
+        )}
+        <div class="project-links">
+          {url && (
+            <a href={url} target="_blank" rel="noopener" class="project-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              {lang === 'ar' ? 'الموقع' : 'Live site'}
+            </a>
+          )}
+          {github && (
+            <a href={github} target="_blank" rel="noopener" class="project-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              GitHub
+            </a>
+          )}
+        </div>
+      </div>
+    )}
+  </div>
+
+  <article class="post-content">
+    <slot />
+  </article>
+</BaseLayout>
+
+<style>
+  .project-header-full {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+  .project-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .project-title {
+    font-size: 2rem;
+    font-family: 'Lalezar', system-ui, sans-serif;
+    margin: 0;
+  }
+  .project-status {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 12px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .project-dates {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .project-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+  .tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .tech-tag {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: var(--code-bg);
+    white-space: nowrap;
+  }
+  .project-links {
+    display: flex;
+    gap: 0.75rem;
+  }
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .project-link:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+</style>

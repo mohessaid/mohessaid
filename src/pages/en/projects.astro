@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+
+const lang = 'en' as const;
+const projects = await getCollection('projects', (p) => p.data.lang === lang);
+---
+
+<BaseLayout
+  title="Projects"
+  description="Projects and achievements by Mohammed Essaid"
+  lang={lang}
+>
+  <Header slot="header" lang={lang} />
+
+  <p class="page-title">Projects</p>
+
+  <ul class="project-list">
+    {projects.map((p) => (
+      <li>
+        <a href={`/en/projects/${p.id.replace(/^en\//, '')}/`} class="project-card">
+          <span class="project-status" style={`border-color: ${p.data.statusColor}; color: ${p.data.statusColor}; view-transition-name: badge-${p.id.replace(/\//g, '-')}`}>{p.data.statusLabel}</span>
+          <h2 class="project-title" style={`view-transition-name: title-${p.id.replace(/\//g, '-')}`}>{p.data.title}</h2>
+          <span class="project-dates" style={`view-transition-name: dates-${p.id.replace(/\//g, '-')}`}>
+            {p.data.startDate} &mdash; {p.data.endDate}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  .project-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .project-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5rem 0;
+    transition: color 0.15s;
+  }
+  .project-card:hover {
+    color: var(--accent);
+  }
+  .project-card:hover .project-title {
+    color: var(--accent);
+  }
+  .project-title {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .project-status {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .project-dates {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+</style>

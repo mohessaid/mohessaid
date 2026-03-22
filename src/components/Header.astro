@@ -1,0 +1,106 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: 'ar' | 'en';
+  slug?: string;
+}
+
+const { lang, slug } = Astro.props;
+
+const altLang = lang === 'ar' ? 'en' : 'ar';
+const altLabel = lang === 'ar' ? 'EN' : 'ع';
+// If on a post page, link to equivalent other-lang listing (not cross-post)
+const altHref = altLang === 'en' ? '/en/' : '/';
+
+const t = useTranslations(lang);
+---
+
+<header class="site-header">
+  <div class="container">
+    <a href={lang === 'en' ? '/en/' : '/'} class="site-logo" aria-label="Mohessaid — Home">
+      <img src="/mohessaid_light.svg" alt="Mohessaid" class="logo-light" width="120" height="44" />
+      <img src="/mohessaid_dark.svg"  alt="Mohessaid" class="logo-dark"  width="120" height="44" />
+    </a>
+
+    <nav class="header-nav">
+      <a href={lang === 'ar' ? '/about/' : '/en/about/'} class="nav-link">
+        {t('nav.about')}
+      </a>
+      <a href={lang === 'ar' ? '/projects/' : '/en/projects/'} class="nav-link">
+        {t('nav.projects')}
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <a href={altHref} class="lang-toggle" aria-label={lang === 'ar' ? 'Switch to English' : 'التبديل للعربية'}>
+        {altLabel}
+      </a>
+      <button
+        id="theme-toggle"
+        class="theme-toggle"
+        aria-label={lang === 'ar' ? 'تبديل المظهر' : 'Toggle theme'}
+        type="button"
+      >
+        <!-- Sun icon (shown in dark mode) -->
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <!-- Moon icon (shown in light mode) -->
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  function initThemeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  }
+
+  // Run on initial load and after view transitions
+  initThemeToggle();
+  document.addEventListener('astro:after-swap', initThemeToggle);
+</script>
+
+<style>
+  .icon-sun,
+  .icon-moon {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+
+  /* Show sun in dark mode, moon in light mode */
+  [data-theme="light"] .icon-sun,
+  :root:not([data-theme="dark"]) .icon-sun {
+    display: none;
+  }
+
+  [data-theme="dark"] .icon-moon {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .icon-moon { display: none; }
+    :root:not([data-theme="light"]) .icon-sun  { display: block; }
+  }
+</style>

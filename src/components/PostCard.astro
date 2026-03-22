@@ -1,0 +1,36 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  slug: string;
+  lang: 'ar' | 'en';
+}
+
+const { title, date, slug, lang } = Astro.props;
+
+const href = lang === 'ar' ? `/blog/${slug}/` : `/en/blog/${slug}/`;
+
+const formattedDate = new Intl.DateTimeFormat(
+  lang === 'ar' ? 'ar-DZ' : 'en-US',
+  { year: 'numeric', month: 'short', day: 'numeric' }
+).format(date);
+
+// Unique view-transition-name per post for smooth page animation
+const vtTitle = `post-title-${slug}`;
+const vtDate  = `post-date-${slug}`;
+---
+
+<li class="post-list-item">
+  <a href={href} class="post-card">
+    <time
+      datetime={date.toISOString()}
+      class="post-date"
+      style={`view-transition-name: ${vtDate}`}
+    >
+      {formattedDate}
+    </time>
+    <span class="post-title" style={`view-transition-name: ${vtTitle}`}>
+      {title}
+    </span>
+  </a>
+</li>

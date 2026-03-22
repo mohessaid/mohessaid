@@ -1,4 +1,4 @@
-name: CI / Build & Deploy to Vercel
+name: Build & Deploy to Cloudflare Pages
 
 on:
   push:
@@ -14,32 +14,47 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # 1. Check out your code
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2. Pull in website-content
-      - name: Pull in website content
+      - name: Checkout content
         uses: actions/checkout@v4
         with:
           repository: mohessaid/website_content
           token: ${{ secrets.CONTENT_DISPATCH_TOKEN }}
-          path: content
+          path: _content
 
-      # 3. Install & build (Astro or Hugo)
-      - name: Build site
-        run: ./build.sh  
-        
-      - name: List public directory
-        run: ls -la ./public
-        
-      # 4. Deploy to Vercel
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
+      - name: Sync content into src/content
+        run: |
+          rm -rf src/content/blog src/content/projects src/content/about
+          cp -r _content/essays   src/content/blog
+          cp -r _content/projects src/content/projects
+          cp -r _content/about    src/content/about
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./public
-          vercel-args: '--prod' 
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+        env:
+          PUBLIC_GA_ID: ${{ secrets.PUBLIC_GA_ID }}
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ab523bcff1d5e827a043a892a1013d72
+          command: pages deploy dist --project-name=mohessaid --branch=main

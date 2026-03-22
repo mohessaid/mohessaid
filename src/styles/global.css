@@ -1,0 +1,557 @@
+/* ============================================================
+   Open Colors — CSS custom properties (subset: grays + blue)
+   https://yeun.github.io/open-colors/
+   ============================================================ */
+:root {
+  /* Gray scale */
+  --oc-gray-0: #f8f9fa;
+  --oc-gray-1: #f1f3f5;
+  --oc-gray-2: #e9ecef;
+  --oc-gray-3: #dee2e6;
+  --oc-gray-4: #ced4da;
+  --oc-gray-5: #adb5bd;
+  --oc-gray-6: #868e96;
+  --oc-gray-7: #495057;
+  --oc-gray-8: #343a40;
+  --oc-gray-9: #212529;
+
+  /* Blue accent */
+  --oc-blue-1: #d0ebff;
+  --oc-blue-4: #4dabf7;
+  --oc-blue-6: #228be6;
+  --oc-blue-7: #1971c2;
+  --oc-blue-9: #1864ab;
+}
+
+/* ============================================================
+   Theme tokens
+   ============================================================ */
+:root,
+[data-theme="light"] {
+  --bg:        var(--oc-gray-0);
+  --bg-raised: #ffffff;
+  --border:    var(--oc-gray-2);
+  --text:      var(--oc-gray-9);
+  --text-muted:var(--oc-gray-6);
+  --accent:    var(--oc-blue-6);
+  --accent-hover: var(--oc-blue-7);
+  --code-bg:   var(--oc-gray-1);
+
+  --shiki-light: initial;
+  --shiki-dark: none;
+}
+
+[data-theme="dark"] {
+  --bg:        var(--oc-gray-9);
+  --bg-raised: var(--oc-gray-8);
+  --border:    var(--oc-gray-7);
+  --text:      var(--oc-gray-1);
+  --text-muted:var(--oc-gray-5);
+  --accent:    var(--oc-blue-4);
+  --accent-hover: var(--oc-blue-1);
+  --code-bg:   var(--oc-gray-8);
+
+  --shiki-light: none;
+  --shiki-dark: initial;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        var(--oc-gray-9);
+    --bg-raised: var(--oc-gray-8);
+    --border:    var(--oc-gray-7);
+    --text:      var(--oc-gray-1);
+    --text-muted:var(--oc-gray-5);
+    --accent:    var(--oc-blue-4);
+    --accent-hover: var(--oc-blue-1);
+    --code-bg:   var(--oc-gray-8);
+
+    --shiki-light: none;
+    --shiki-dark: initial;
+  }
+}
+
+/* ============================================================
+   Reset + Base
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 18px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  /* Reserve scrollbar space so it doesn't cause layout shift during view transitions */
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* RTL */
+html[dir="rtl"] body {
+  font-size: 18px;
+  line-height: 1.9; /* Arabic needs slightly more line height */
+}
+
+/* ============================================================
+   Typography
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lalezar', sans-serif;
+  font-weight: 400; /* Lalezar is display, 400 is its style */
+  line-height: 1.2;
+  color: var(--text);
+}
+
+h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); }
+h2 { font-size: clamp(1.3rem, 3.5vw, 1.8rem); }
+h3 { font-size: 1.2rem; }
+
+p {
+  margin-block: 0.9em;
+  max-width: 68ch;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   Layout helpers
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: 740px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 5vw, 2rem);
+}
+
+main {
+  flex: 1;
+  padding-block: 2.5rem;
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.site-header {
+  padding-block: 2rem 1.5rem;
+  view-transition-name: site-header;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  color: var(--text);
+}
+
+.site-logo img {
+  height: 36px;
+  width: auto;
+}
+
+/* Default: hide dark logo (light logo shows by default) */
+.logo-dark { display: none; }
+
+/* Dark theme: swap logos */
+[data-theme="dark"] .logo-light { display: none; }
+[data-theme="dark"] .logo-dark  { display: block; }
+
+/* Fallback for system preference before JS sets data-theme */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .logo-light { display: none; }
+  :root:not([data-theme="light"]) .logo-dark  { display: block; }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-inline-end: auto;
+  margin-inline-start: 1.5rem;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: var(--text);
+}
+.lang-toggle,
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  line-height: 1;
+}
+
+.lang-toggle:hover,
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ============================================================
+   Post list
+   ============================================================ */
+.post-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.post-card {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 1rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.post-card:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.post-card:hover .post-title {
+  color: var(--accent);
+}
+
+.post-title {
+  font-family: 'Lalezar', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--text);
+  transition: color 0.15s;
+}
+
+.post-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.load-more-btn {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.load-more-btn:hover {
+  background: var(--code-bg);
+  border-color: var(--text-muted);
+}
+
+/* ============================================================
+   Post / Article
+   ============================================================ */
+.post-header {
+  margin-bottom: 2.5rem;
+}
+
+.post-header .post-title {
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  margin-bottom: 0.5rem;
+}
+
+.post-meta {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.15s;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.post-content {
+  max-width: 68ch;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.post-content ul,
+.post-content ol {
+  padding-inline-start: 1.5em;
+  margin-block: 0.8em;
+}
+
+.post-content li {
+  margin-block: 0.2em;
+}
+
+.post-content blockquote {
+  border-inline-start: 3px solid var(--accent);
+  padding-inline-start: 1rem;
+  color: var(--text-muted);
+  margin-inline: 0;
+  margin-block: 1em;
+}
+
+/* ============================================================
+   Code blocks (Shiki dual-theme)
+   ============================================================ */
+pre.astro-code {
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-block: 1.25em;
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+/* Dual theme switching */
+pre.astro-code[data-theme*="github-light"] { display: var(--shiki-light, initial); }
+pre.astro-code[data-theme*="github-dark"]  { display: var(--shiki-dark, none); }
+
+code:not(pre code) {
+  background: var(--code-bg);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+
+/* Copy button */
+.code-wrapper {
+  position: relative;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.6rem;
+  inset-inline-end: 0.6rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.72rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg-raised);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  transition: color 0.15s, border-color 0.15s;
+  line-height: 1;
+}
+
+.copy-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  padding-block: 2.5rem 2rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.site-footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.site-footer a {
+  color: var(--text-muted);
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: color 0.15s;
+}
+
+.social-links a:hover {
+  color: var(--accent);
+}
+
+.social-links svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================================================
+   View Transitions
+   ============================================================ */
+
+/* Root: fade out/in. object-fit:none prevents the screenshots from being
+   scaled to fill the group as it interpolates page height → no zoom. */
+::view-transition-old(root) {
+  animation: vt-fade-out 0.2s ease forwards;
+  mix-blend-mode: normal;
+  object-fit: none;
+  object-position: top center;
+}
+::view-transition-new(root) {
+  animation: vt-fade-in 0.25s ease forwards;
+  mix-blend-mode: normal;
+  object-fit: none;
+  object-position: top center;
+}
+
+/* Header: persists — let the group morph smoothly, suppress the image crossfade */
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Page title: group morphs position, images slide */
+::view-transition-old(page-title),
+::view-transition-old(post-date),
+::view-transition-old(project-dates),
+::view-transition-old(project-badge) {
+  animation: vt-title-out 0.15s ease forwards;
+}
+::view-transition-new(page-title),
+::view-transition-new(post-date),
+::view-transition-new(project-dates),
+::view-transition-new(project-badge) {
+  animation: vt-title-in 0.22s ease forwards;
+}
+
+@keyframes vt-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes vt-title-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-6px); }
+}
+
+@keyframes vt-title-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.page-title {
+  font-family: 'Lalezar', sans-serif;
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+  view-transition-name: page-title;
+}

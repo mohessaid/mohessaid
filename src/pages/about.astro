@@ -1,0 +1,24 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+
+const lang = 'ar' as const;
+const entries = await getCollection('about');
+const entry = entries.find(e => e.id.startsWith('ar'))!;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title="عني"
+  description="نبذة عن محمد عيسى مزيرق — مهندس برمجيات شغوف بالأداء وتجربة المستخدم"
+  lang={lang}
+>
+  <Header slot="header" lang={lang} />
+
+  <p class="page-title">عني</p>
+
+  <article class="post-content">
+    <Content />
+  </article>
+</BaseLayout>

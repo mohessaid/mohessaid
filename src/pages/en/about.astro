@@ -1,0 +1,24 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+
+const lang = 'en' as const;
+const entries = await getCollection('about');
+const entry = entries.find(e => e.id.startsWith('en'))!;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title="About"
+  description="About Mohammed Essaid MEZERREG — Software Engineer passionate about performance and UX"
+  lang={lang}
+>
+  <Header slot="header" lang={lang} />
+
+  <p class="page-title">About Me</p>
+
+  <article class="post-content">
+    <Content />
+  </article>
+</BaseLayout>

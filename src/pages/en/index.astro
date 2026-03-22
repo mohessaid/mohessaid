@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import PostCard from '@/components/PostCard.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+
+const allPosts = await getCollection('blog', ({ data }) =>
+  data.lang === 'en' && !data.draft
+);
+
+const posts = allPosts.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<BaseLayout
+  title="Mohessaid"
+  description="Software engineer — tech essays and thoughts"
+  lang={lang}
+>
+  <Header slot="header" lang={lang} />
+
+  <p class="page-title">Essays</p>
+
+  {posts.length === 0 ? (
+    <p style="color: var(--text-muted);">No essays yet.</p>
+  ) : (
+    <>
+      <ul class="post-list" id="post-list">
+        {posts.map((post, index) => (
+          <div class="post-item-wrapper" style={index >= 10 ? 'display: none;' : ''}>
+            <PostCard
+              title={post.data.title}
+              date={post.data.date}
+              slug={post.id.replace(/^en\//, '')}
+              lang={lang}
+            />
+          </div>
+        ))}
+      </ul>
+      {posts.length > 10 && (
+        <div class="load-more-container">
+          <button id="load-more-btn" class="load-more-btn">{t('essays.loadMore')}</button>
+        </div>
+      )}
+    </>
+  )}
+</BaseLayout>
+
+<script>
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  const itemsArea = document.getElementById('post-list');
+  
+  if (loadMoreBtn && itemsArea) {
+    let currentVisible = 10;
+    const items = itemsArea.querySelectorAll('.post-item-wrapper');
+    
+    loadMoreBtn.addEventListener('click', () => {
+      let count = 0;
+      for (let i = currentVisible; i < items.length; i++) {
+        if (count >= 10) break;
+        (items[i] as HTMLElement).style.display = 'block';
+        count++;
+        currentVisible++;
+      }
+      
+      if (currentVisible >= items.length) {
+        loadMoreBtn.style.display = 'none';
+      }
+    });
+  }
+</script>

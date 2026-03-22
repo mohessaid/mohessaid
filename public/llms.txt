@@ -1,0 +1,32 @@
+# Mohessaid
+
+> Mohammed Essaid MEZERREG — Software Engineer based in Algeria. Builds software with PHP, Go, JavaScript, Ruby, and Elixir. Writes about software engineering, tools, and ideas.
+
+This is the personal website of Mohammed Essaid (Mohessaid). It contains technical essays in Arabic and English, plus a portfolio of software projects. The site is intentionally minimal: no tracking, no ads, just text and ideas.
+
+## Essays (Arabic — default)
+
+- [الرئيسية / Essays index](https://mohessaid.com/): Arabic-language technical writing and thoughts
+- [أهلاً وسهلاً](https://mohessaid.com/blog/welcome/): Welcome post — introduction to the site
+
+## Essays (English)
+
+- [Essays index](https://mohessaid.com/en/): English-language technical writing and thoughts
+
+## Projects
+
+- [المشاريع / Projects (Arabic)](https://mohessaid.com/projects/): Software projects — Eisenflow, NASA9, Typst tools
+- [Projects (English)](https://mohessaid.com/en/projects/): Software projects in English
+
+## About
+
+- [عني / About (Arabic)](https://mohessaid.com/about/): محمد عيسى مزيرق، مهندس برمجيات
+- [About (English)](https://mohessaid.com/en/about/): Mohammed Essaid MEZERREG, Software Engineer
+
+## Author
+
+Mohammed Essaid MEZERREG (known online as Mohessaid) is a software engineer who works primarily with server-side technologies (PHP, Go, Ruby) and frontend tools (JavaScript). He also experiments with Elixir and Python. He values performance, minimalism, and good UX.
+
+- GitHub: https://github.com/mohessaid
+- LinkedIn: https://linkedin.com/in/mohessaid
+- X / Twitter: https://x.com/mohessaid
