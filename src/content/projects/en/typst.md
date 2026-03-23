@@ -7,6 +7,7 @@ endDate: 'Present'
 lang: 'en'
 description: 'An architectural dashboard for managing printing processes using Convex.'
 tech: ['Astro', 'TypeScript', 'Convex']
+draft: false
 ---
 
 A dashboard designed to streamline printing workflows.

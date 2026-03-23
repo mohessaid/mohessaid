@@ -7,6 +7,7 @@ endDate: '2022'
 lang: 'en'
 description: 'A personal productivity and task management project.'
 tech: ['React', 'TypeScript', 'Node.js']
+draft: false
 ---
 
 A side project focused on applying the Eisenhower Matrix to task management.

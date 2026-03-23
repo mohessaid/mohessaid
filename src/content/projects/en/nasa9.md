@@ -7,6 +7,7 @@ endDate: 'Present'
 lang: 'en'
 description: 'A collection of newly built UI components and tools.'
 tech: ['Astro', 'TypeScript', 'CSS']
+draft: false
 ---
 
 This project serves as a space to showcase the tools and interfaces I have recently built.

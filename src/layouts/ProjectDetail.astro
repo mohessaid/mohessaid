@@ -29,9 +29,9 @@ const {
 const t = useTranslations(lang);
 const backHref = lang === 'ar' ? '/projects/' : '/en/projects/';
 
-const vtBadge = `project-badge`;
+const vtBadge = `badge-${projectId.replace(/\//g, '-')}`;
 const vtTitle = `title-${projectId.replace(/\//g, '-')}`;
-const vtDates = `project-dates`;
+const vtDates = `dates-${projectId.replace(/\//g, '-')}`;
 
 // ASCII-safe JSON encoding — prevents esbuild multi-byte char issues in inline scripts
 const toSafeJson = (obj: unknown) =>

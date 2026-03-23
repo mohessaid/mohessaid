@@ -9,7 +9,7 @@ const projects = await getCollection('projects', (p) => p.data.lang === lang);
 
 <BaseLayout
   title="المشاريع"
-  description="مشاريع وإنجازات محمد عيسى"
+  description="مشاريع وإنجازات محمد السعيد مزرق"
   lang={lang}
 >
   <Header slot="header" lang={lang} />
@@ -67,6 +67,8 @@ const projects = await getCollection('projects', (p) => p.data.lang === lang);
     white-space: nowrap;
     font-weight: 500;
     flex-shrink: 0;
+    min-width: 6.5rem;
+    text-align: center;
   }
   .project-dates {
     color: var(--text-muted);

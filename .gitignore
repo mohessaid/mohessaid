@@ -3,4 +3,4 @@ dist/
 .astro/
 .env
 .env.*
-!.env.example
+!.env.example_content/

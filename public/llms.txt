@@ -20,7 +20,7 @@ This is the personal website of Mohammed Essaid (Mohessaid). It contains technic
 
 ## About
 
-- [عني / About (Arabic)](https://mohessaid.com/about/): محمد عيسى مزيرق، مهندس برمجيات
+- [عني / About (Arabic)](https://mohessaid.com/about/): محمد السعيد مزرق، مهندس برمجيات
 - [About (English)](https://mohessaid.com/en/about/): Mohammed Essaid MEZERREG, Software Engineer
 
 ## Author

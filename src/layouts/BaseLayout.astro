@@ -18,16 +18,16 @@ const {
 } = Astro.props;
 
 const defaultDescription = lang === 'ar'
-  ? 'محمد عيسى مزيرق — مهندس برمجيات. PHP، Go، JavaScript، Ruby. رؤى تقنية ومشاريع.'
+  ? 'محمد السعيد مزرق — مهندس برمجيات. PHP، Go، JavaScript، Ruby. رؤى تقنية ومشاريع.'
   : 'Mohammed Essaid — Software Engineer working with PHP, Go, JavaScript & Ruby. Tech essays and projects.';
 
 const description = Astro.props.description ?? defaultDescription;
 
 const ogImage = new URL('/web-app-manifest-512x512.png', Astro.site).href;
 
-const fullTitle = title === 'محمد عيسى' || title === 'Mohessaid'
+const fullTitle = title === 'محمد السعيد مزرق' || title === 'Mohessaid'
   ? title
-  : `${title} — محمد عيسى`;
+  : `${title} — محمد السعيد مزرق`;
 
 // Compute hreflang alternate URLs from the current pathname
 const pathname = Astro.url.pathname;
@@ -62,7 +62,7 @@ const siteJsonLd = {
       '@type': 'Person',
       '@id': `${siteBase}/#person`,
       name: 'Mohammed Essaid',
-      alternateName: ['Mohessaid', 'محمد عيسى', 'Mohammed Essaid MEZERREG'],
+      alternateName: ['Mohessaid', 'محمد السعيد مزرق', 'Mohammed Essaid MEZERREG'],
       url: siteBase,
       jobTitle: 'Software Engineer',
       knowsAbout: ['PHP', 'Go', 'JavaScript', 'Ruby', 'Elixir', 'Python', 'Software Engineering'],
@@ -184,7 +184,7 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
     </main>
     <footer class="site-footer">
       <div class="container">
-        <span>© {new Date().getFullYear()} Mohammed Essaid</span>
+        <span>{lang === 'ar' ? `© ${new Date().getFullYear()} محمد السعيد مزرق` : `© ${new Date().getFullYear()} Mohammed Essaid`}</span>
         <nav class="social-links" aria-label={lang === 'ar' ? 'روابط التواصل' : 'Social links'}>
           <a href="https://github.com/mohessaid" target="_blank" rel="noopener" aria-label="GitHub">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
